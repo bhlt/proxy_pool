@@ -39,7 +39,7 @@ def timeOutValidator(proxy):
                'Connection': 'keep-alive',
                'Accept-Language': 'zh-CN,zh;q=0.8'}
     try:
-        r = requests.head(conf.verifyUrl, headers=headers, proxies=proxies, timeout=conf.verifyTimeout, verify=False)
+        r = requests.get(conf.verifyUrl, headers=headers, proxies=proxies, timeout=conf.verifyTimeout, verify=False)
         if r.status_code == 200:
             return True
     except Exception as e:

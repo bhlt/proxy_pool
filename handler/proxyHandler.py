@@ -51,6 +51,9 @@ class ProxyHandler(object):
         :return:
         """
         self.db.put(proxy)
+    
+    def update(self, proxy):
+        self.db.update(proxy)
 
     def delete(self, proxy):
         """

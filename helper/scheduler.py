@@ -26,23 +26,25 @@ from handler.configHandler import ConfigHandler
 
 
 def _runProxyFetch():
-    proxy_queue = Queue()
-
+    # proxy_queue = Queue()
+    proxy_handler = ProxyHandler()
     for proxy in runFetcher():
-        proxy_queue.put(Proxy(proxy).to_json)
+        proxy_handler.db.put(Proxy(proxy))
+        # proxy_queue.put(Proxy(proxy).to_json)
 
-    runChecker("raw", proxy_queue)
-
+    # runChecker("raw", proxy_queue)
 
 def _runProxyCheck():
     proxy_queue = Queue()
     proxy_handler = ProxyHandler()
+    
+    # 检查是否需要提取新的代理
     if proxy_handler.db.getCount() < proxy_handler.conf.poolSizeMin:
         _runProxyFetch()
-    else:
-        for proxy in proxy_handler.getAll():
-            proxy_queue.put(proxy.to_json)
-        runChecker("use", proxy_queue)
+
+    for proxy in proxy_handler.getAll():
+        proxy_queue.put(proxy.to_json)
+    runChecker("use", proxy_queue)
 
 
 def runScheduler():

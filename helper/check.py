@@ -88,7 +88,7 @@ class Checker(Thread):
             else:
                 if proxy.last_status:
                     self.log.info('ProxyCheck - {}  : {} pass'.format(self.name, proxy.proxy.ljust(23)))
-                    self.proxy_handler.put(proxy)
+                    self.proxy_handler.update(proxy)
                 else:
                     if proxy.fail_count > self.conf.maxFailCount:
                         self.log.info('ProxyCheck - {}  : {} fail, count {} delete'.format(self.name,
@@ -99,7 +99,7 @@ class Checker(Thread):
                         self.log.info('ProxyCheck - {}  : {} fail, count {} keep'.format(self.name,
                                                                                          proxy.proxy.ljust(23),
                                                                                          proxy.fail_count))
-                        self.proxy_handler.put(proxy)
+                        self.proxy_handler.update(proxy)
             self.queue.task_done()
 
 

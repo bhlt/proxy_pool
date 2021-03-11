@@ -37,7 +37,7 @@ PORT = 5010
 # example:
 #      Redis: redis://:password@ip:port/db
 #      Ssdb:  ssdb://:password@ip:port
-DB_CONN = 'redis://:pwd@127.0.0.1:6379/0'
+DB_CONN = 'redis://:123456@192.168.32.129:6379/0'
 
 # proxy table name
 TABLE_NAME = 'use_proxy'
@@ -59,10 +59,11 @@ PROXY_FETCHER = [
 ]
 
 # ############# proxy validator #################
-VERIFY_URL = "http://www.baidu.com"
+# VERIFY_URL = "http://www.baidu.com"
+VERIFY_URL = "https://h5.waimai.meituan.com/waimai/mindex/home"
 
 # 代理验证时超时时间
-VERIFY_TIMEOUT = 10
+VERIFY_TIMEOUT = 2
 
 # 代理校验规则基于的最近校验次数
 PROXY_CHECK_COUNT = 10
